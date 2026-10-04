@@ -1,0 +1,68 @@
+import React from 'react';
+
+export type AvenState =
+  | 'idle'
+  | 'listening'
+  | 'understanding'
+  | 'thinking'
+  | 'working'
+  | 'waiting'
+  | 'responding'
+  | 'completed'
+  | 'error';
+
+interface AvenMarkProps {
+  size?: number | string;
+  color?: string;
+  state?: AvenState;
+  className?: string;
+}
+
+/**
+ * AvenMark: Canonical four-segment geometric Aven brand mark.
+ * Directly sourced from Aven-Logo-Temp/aven-mark.svg.
+ * All segments addressable via #segment-1 .. #segment-4.
+ */
+export const AvenMark: React.FC<AvenMarkProps> = ({
+  size = 24,
+  color = '#111111',
+  state = 'idle',
+  className = '',
+}) => {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 256 256"
+      width={size}
+      height={size}
+      className={`aven-svg-mark state-${state} ${className}`}
+      style={{
+        display: 'inline-block',
+        verticalAlign: 'middle',
+        flexShrink: 0,
+      }}
+      aria-label={`Aven Mark (${state})`}
+    >
+      <g id="aven-mark" fill={color}>
+        <path
+          id="segment-1"
+          d="M 115.36 105.63 Q 116.00 106.00 116.72 106.17 L 138.57 111.21 Q 142.00 112.00 143.90 109.04 L 174.44 61.53 Q 178.00 56.00 173.54 51.17 L 157.72 34.03 Q 154.00 30.00 148.79 31.74 L 96.90 49.03 Q 94.00 50.00 92.38 52.59 L 77.58 76.27 Q 74.00 82.00 79.87 85.35 Z"
+        />
+        <path
+          id="segment-2"
+          d="M 150.37 115.36 Q 150.00 116.00 149.83 116.72 L 144.79 138.57 Q 144.00 142.00 146.96 143.90 L 194.47 174.44 Q 200.00 178.00 204.83 173.54 L 221.97 157.72 Q 226.00 154.00 224.26 148.79 L 206.97 96.90 Q 206.00 94.00 203.41 92.38 L 179.73 77.58 Q 174.00 74.00 170.65 79.87 Z"
+        />
+        <path
+          id="segment-3"
+          d="M 140.64 150.37 Q 140.00 150.00 139.28 149.83 L 117.43 144.79 Q 114.00 144.00 112.10 146.96 L 81.56 194.47 Q 78.00 200.00 82.46 204.83 L 98.28 221.97 Q 102.00 226.00 107.21 224.26 L 159.10 206.97 Q 162.00 206.00 163.62 203.41 L 178.42 179.73 Q 182.00 174.00 176.13 170.65 Z"
+        />
+        <path
+          id="segment-4"
+          d="M 105.63 140.64 Q 106.00 140.00 106.17 139.28 L 111.21 117.43 Q 112.00 114.00 109.04 112.10 L 61.53 81.56 Q 56.00 78.00 51.17 82.46 L 34.03 98.28 Q 30.00 102.00 31.74 107.21 L 49.03 159.10 Q 50.00 162.00 52.59 163.62 L 76.27 178.42 Q 82.00 182.00 85.35 176.13 Z"
+        />
+      </g>
+    </svg>
+  );
+};
+
+export default AvenMark;

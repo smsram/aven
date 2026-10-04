@@ -1,0 +1,511 @@
+/* ==========================================================================
+   AVEN DESIGN SYSTEM & AGENT MOTION SYSTEM
+   Theme: Full Windows Native Desktop Application Shell
+   Theme Options: Light, Dark, System
+   Tokens: --background, --foreground, --surface, --surface-secondary,
+           --border, --muted, --accent, --accent-foreground
+   Motion: Canonical Aven-Logo-Temp laboratory integration
+   ========================================================================== */
+
+/* Light Theme Tokens (Default) */
+:root,
+[data-theme="light"] {
+  /* Surfaces & Backgrounds */
+  --background: #FAFAFA;
+  --foreground: #111111;
+  --surface: #FFFFFF;
+  --surface-secondary: #F5F6F8;
+  --surface-hover: #F0F2F5;
+  --surface-active: #EBF5F9;
+  --titlebar-bg: #F7F7F8;
+  --sidebar-bg: #FAFAFA;
+  --card-bg: #FFFFFF;
+
+  /* Borders */
+  --border: #E7E7E7;
+  --border-subtle: #F0F0F0;
+  --border-strong: #D1D5DB;
+
+  /* Text & Labels */
+  --muted: #6B7280;
+  --muted-light: #9CA3AF;
+  --text-inverse: #FFFFFF;
+
+  /* Brand Accent Tokens */
+  --accent: #2596BE;
+  --accent-hover: #1F7FA3;
+  --accent-foreground: #FFFFFF;
+  --accent-subtle: rgba(37, 150, 190, 0.08);
+  --accent-border: rgba(37, 150, 190, 0.28);
+  --accent-glow: rgba(37, 150, 190, 0.18);
+
+  /* Status Colors */
+  --status-green: #10B981;
+  --status-amber: #F59E0B;
+  --status-error: #E05252;
+
+  /* Orb Colors */
+  --orb-mark-color: #111111;
+  --orb-mark-active: #2596BE;
+
+  /* Shadows */
+  --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.04);
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.05), 0 1px 2px rgba(0, 0, 0, 0.03);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.05), 0 1px 3px rgba(0, 0, 0, 0.03);
+  --shadow-float: 0 16px 40px rgba(0, 0, 0, 0.08);
+}
+
+/* Dark Theme Tokens (Intentionally crafted for deep contrast and visual calmness) */
+[data-theme="dark"],
+html.dark {
+  /* Surfaces & Backgrounds */
+  --background: #0E1116;
+  --foreground: #F1F5F9;
+  --surface: #161B22;
+  --surface-secondary: #1C2128;
+  --surface-hover: #22272E;
+  --surface-active: #1A2633;
+  --titlebar-bg: #11141A;
+  --sidebar-bg: #11141A;
+  --card-bg: #161B22;
+
+  /* Borders */
+  --border: #2D333B;
+  --border-subtle: #22272E;
+  --border-strong: #444C56;
+
+  /* Text & Labels */
+  --muted: #94A3B8;
+  --muted-light: #64748B;
+  --text-inverse: #0E1116;
+
+  /* Brand Accent Tokens */
+  --accent: #2596BE;
+  --accent-hover: #38BDF8;
+  --accent-foreground: #FFFFFF;
+  --accent-subtle: rgba(37, 150, 190, 0.16);
+  --accent-border: rgba(37, 150, 190, 0.4);
+  --accent-glow: rgba(37, 150, 190, 0.3);
+
+  /* Status Colors */
+  --status-green: #34D399;
+  --status-amber: #FBBF24;
+  --status-error: #F87171;
+
+  /* Orb Colors */
+  --orb-mark-color: #F1F5F9;
+  --orb-mark-active: #38BDF8;
+
+  /* Shadows */
+  --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.2);
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.4);
+  --shadow-float: 0 16px 40px rgba(0, 0, 0, 0.5);
+}
+
+:root {
+  /* Fonts */
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+
+  /* Restrained Radius */
+  --radius-xs: 4px;
+  --radius-sm: 6px;
+  --radius-md: 8px;
+  --radius-lg: 10px;
+  --radius-xl: 12px;
+  --radius-full: 9999px;
+
+  /* Layout Dimensions */
+  --sidebar-width: 220px;
+  --titlebar-height: 40px;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+  font-family: var(--font-sans);
+  background-color: var(--background);
+  color: var(--foreground);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow: hidden;
+  user-select: none;
+}
+
+/* Root occupies 100% of the desktop window */
+#root {
+  width: 100vw;
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--background);
+  overflow: hidden;
+}
+
+/* Native Titlebar Window Drag Regions */
+.titlebar-drag-region {
+  -webkit-app-region: drag;
+}
+
+.titlebar-no-drag {
+  -webkit-app-region: no-drag;
+}
+
+button {
+  font-family: inherit;
+  border: none;
+  background: none;
+  cursor: pointer;
+  outline: none;
+  color: inherit;
+}
+
+input, textarea {
+  font-family: inherit;
+  border: none;
+  outline: none;
+  background: transparent;
+  color: inherit;
+}
+
+/* Custom Scrollbars */
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--border-strong);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--muted);
+}
+
+/* ==========================================================================
+   CANONICAL AVEN MOTION SYSTEM (From Aven-Logo-Temp)
+   Targets: #segment-1, #segment-2, #segment-3, #segment-4
+   ========================================================================== */
+
+.aven-svg-mark {
+  overflow: visible;
+  display: block;
+}
+
+.aven-svg-mark #segment-1,
+.aven-svg-mark #segment-2,
+.aven-svg-mark #segment-3,
+.aven-svg-mark #segment-4 {
+  transform-origin: 128px 128px;
+  transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1),
+              opacity 0.45s ease;
+  will-change: transform, opacity;
+}
+
+/* 1. IDLE STATE */
+.state-idle #segment-1,
+.state-idle #segment-2,
+.state-idle #segment-3,
+.state-idle #segment-4 {
+  transform: translate(0px, 0px) rotate(0deg) scale(1);
+  opacity: 1;
+  animation: none;
+}
+
+/* 2. LISTENING STATE */
+.state-listening #segment-1 {
+  animation: aven-listen-1 1.3s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite alternate;
+}
+.state-listening #segment-2 {
+  animation: aven-listen-2 1.3s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite alternate;
+}
+.state-listening #segment-3 {
+  animation: aven-listen-3 1.3s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite alternate;
+}
+.state-listening #segment-4 {
+  animation: aven-listen-4 1.3s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite alternate;
+}
+
+@keyframes aven-listen-1 {
+  0%   { transform: translate(0px, 0px) scale(1); }
+  100% { transform: translate(-3.5px, -4.2px) scale(1.02); }
+}
+@keyframes aven-listen-2 {
+  0%   { transform: translate(0px, 0px) scale(1); }
+  100% { transform: translate(4.2px, -3.5px) scale(1.02); }
+}
+@keyframes aven-listen-3 {
+  0%   { transform: translate(0px, 0px) scale(1); }
+  100% { transform: translate(3.5px, 4.2px) scale(1.02); }
+}
+@keyframes aven-listen-4 {
+  0%   { transform: translate(0px, 0px) scale(1); }
+  100% { transform: translate(-4.2px, 3.5px) scale(1.02); }
+}
+
+/* 3. UNDERSTANDING STATE */
+.state-understanding #segment-1 {
+  animation: aven-understand-1 1.5s cubic-bezier(0.4, 0, 0.2, 1) infinite alternate;
+}
+.state-understanding #segment-2 {
+  animation: aven-understand-2 1.5s cubic-bezier(0.4, 0, 0.2, 1) infinite alternate;
+  animation-delay: 0.15s;
+}
+.state-understanding #segment-3 {
+  animation: aven-understand-3 1.5s cubic-bezier(0.4, 0, 0.2, 1) infinite alternate;
+  animation-delay: 0.3s;
+}
+.state-understanding #segment-4 {
+  animation: aven-understand-4 1.5s cubic-bezier(0.4, 0, 0.2, 1) infinite alternate;
+  animation-delay: 0.45s;
+}
+
+@keyframes aven-understand-1 {
+  0%   { transform: translate(0px, 0px) scale(1); }
+  100% { transform: translate(1.5px, -2.5px) scale(1.015); }
+}
+@keyframes aven-understand-2 {
+  0%   { transform: translate(0px, 0px) scale(1); }
+  100% { transform: translate(2.5px, 1.5px) scale(1.015); }
+}
+@keyframes aven-understand-3 {
+  0%   { transform: translate(0px, 0px) scale(1); }
+  100% { transform: translate(-1.5px, 2.5px) scale(1.015); }
+}
+@keyframes aven-understand-4 {
+  0%   { transform: translate(0px, 0px) scale(1); }
+  100% { transform: translate(-2.5px, -1.5px) scale(1.015); }
+}
+
+/* 4. THINKING STATE */
+.state-thinking #segment-1 {
+  animation: aven-think-1 1.6s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite alternate;
+}
+.state-thinking #segment-2 {
+  animation: aven-think-2 1.6s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite alternate;
+  animation-delay: 0.22s;
+}
+.state-thinking #segment-3 {
+  animation: aven-think-3 1.6s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite alternate;
+  animation-delay: 0.44s;
+}
+.state-thinking #segment-4 {
+  animation: aven-think-4 1.6s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite alternate;
+  animation-delay: 0.66s;
+}
+
+@keyframes aven-think-1 {
+  0%   { transform: translate(0px, 0px) rotate(0deg); }
+  50%  { transform: translate(3.0px, -2.2px) rotate(2.4deg); }
+  100% { transform: translate(-1.8px, -3.2px) rotate(-1.6deg); }
+}
+@keyframes aven-think-2 {
+  0%   { transform: translate(0px, 0px) rotate(0deg); }
+  50%  { transform: translate(-2.2px, -2.8px) rotate(-2.2deg); }
+  100% { transform: translate(3.2px, -1.8px) rotate(2.0deg); }
+}
+@keyframes aven-think-3 {
+  0%   { transform: translate(0px, 0px) rotate(0deg); }
+  50%  { transform: translate(-2.8px, 2.2px) rotate(2.4deg); }
+  100% { transform: translate(1.8px, 3.2px) rotate(-1.6deg); }
+}
+@keyframes aven-think-4 {
+  0%   { transform: translate(0px, 0px) rotate(0deg); }
+  50%  { transform: translate(2.2px, 2.8px) rotate(-2.2deg); }
+  100% { transform: translate(-3.2px, 1.8px) rotate(2.0deg); }
+}
+
+/* 5. WORKING STATE */
+.state-working #segment-1 {
+  animation: aven-work-pulse 0.96s cubic-bezier(0.2, 0.8, 0.3, 1) infinite;
+  animation-delay: 0s;
+}
+.state-working #segment-2 {
+  animation: aven-work-pulse 0.96s cubic-bezier(0.2, 0.8, 0.3, 1) infinite;
+  animation-delay: 0.24s;
+}
+.state-working #segment-3 {
+  animation: aven-work-pulse 0.96s cubic-bezier(0.2, 0.8, 0.3, 1) infinite;
+  animation-delay: 0.48s;
+}
+.state-working #segment-4 {
+  animation: aven-work-pulse 0.96s cubic-bezier(0.2, 0.8, 0.3, 1) infinite;
+  animation-delay: 0.72s;
+}
+
+@keyframes aven-work-pulse {
+  0%   { transform: translate(0px, 0px) scale(1); opacity: 0.92; }
+  22%  { transform: translate(-4.0px, -5.2px) scale(1.04); opacity: 1; }
+  45%  { transform: translate(0.6px, 0.6px) scale(0.99); opacity: 0.95; }
+  100% { transform: translate(0px, 0px) scale(1); opacity: 0.92; }
+}
+
+/* 6. WAITING STATE */
+.state-waiting #segment-1,
+.state-waiting #segment-2,
+.state-waiting #segment-3,
+.state-waiting #segment-4 {
+  animation: aven-wait-breath 2.2s ease-in-out infinite alternate;
+}
+@keyframes aven-wait-breath {
+  0%   { transform: scale(1); opacity: 0.85; }
+  100% { transform: scale(1.025); opacity: 1; }
+}
+
+/* 7. RESPONDING STATE */
+.state-responding #segment-1 {
+  animation: aven-respond-1 1.4s cubic-bezier(0.16, 1, 0.3, 1) infinite alternate;
+}
+.state-responding #segment-2 {
+  animation: aven-respond-2 1.4s cubic-bezier(0.16, 1, 0.3, 1) infinite alternate;
+  animation-delay: 0.1s;
+}
+.state-responding #segment-3 {
+  animation: aven-respond-3 1.4s cubic-bezier(0.16, 1, 0.3, 1) infinite alternate;
+  animation-delay: 0.2s;
+}
+.state-responding #segment-4 {
+  animation: aven-respond-4 1.4s cubic-bezier(0.16, 1, 0.3, 1) infinite alternate;
+  animation-delay: 0.3s;
+}
+
+@keyframes aven-respond-1 {
+  0%   { transform: translate(-2px, -2px) scale(1.015); opacity: 0.92; }
+  100% { transform: translate(0.9px, 0.9px) scale(0.985); opacity: 1; }
+}
+@keyframes aven-respond-2 {
+  0%   { transform: translate(2px, -2px) scale(1.015); opacity: 0.92; }
+  100% { transform: translate(-0.9px, 0.9px) scale(0.985); opacity: 1; }
+}
+@keyframes aven-respond-3 {
+  0%   { transform: translate(2px, 2px) scale(1.015); opacity: 0.92; }
+  100% { transform: translate(-0.9px, -0.9px) scale(0.985); opacity: 1; }
+}
+@keyframes aven-respond-4 {
+  0%   { transform: translate(-2px, 2px) scale(1.015); opacity: 0.92; }
+  100% { transform: translate(0.9px, -0.9px) scale(0.985); opacity: 1; }
+}
+
+/* 8. COMPLETED STATE */
+.state-completed #segment-1,
+.state-completed #segment-2,
+.state-completed #segment-3,
+.state-completed #segment-4 {
+  animation: aven-complete-pulse 0.65s cubic-bezier(0.16, 1, 0.3, 1) 1 forwards;
+}
+@keyframes aven-complete-pulse {
+  0%   { transform: scale(1); }
+  35%  { transform: scale(1.036); }
+  100% { transform: scale(1); }
+}
+
+/* 9. ERROR STATE */
+.state-error #segment-1 {
+  animation: aven-error-interruption 0.48s cubic-bezier(0.2, 0.9, 0.3, 1) 1 forwards;
+}
+.state-error #segment-2 {
+  animation: aven-error-interruption 0.48s cubic-bezier(0.2, 0.9, 0.3, 1) 1 forwards;
+  animation-delay: 0.04s;
+}
+.state-error #segment-3 {
+  animation: aven-error-interruption 0.48s cubic-bezier(0.2, 0.9, 0.3, 1) 1 forwards;
+  animation-delay: 0.08s;
+}
+.state-error #segment-4 {
+  animation: aven-error-interruption 0.48s cubic-bezier(0.2, 0.9, 0.3, 1) 1 forwards;
+  animation-delay: 0.12s;
+}
+
+@keyframes aven-error-interruption {
+  0%   { transform: translate(0px, 0px) scale(1); }
+  25%  { transform: translate(3.2px, -2.4px) scale(1.025); }
+  55%  { transform: translate(-2.2px, 1.2px) scale(0.985); }
+  100% { transform: translate(0px, 0px) scale(1); }
+}
+
+/* ==========================================================================
+   AGENT ORB CONTAINER (From Aven-Logo-Temp)
+   ========================================================================== */
+
+.agent-orb-container {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  user-select: none;
+}
+
+.agent-orb-glass {
+  border-radius: 50%;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: radial-gradient(circle at 35% 30%, rgba(255, 255, 255, 0.96) 0%, rgba(230, 243, 250, 0.85) 50%, rgba(37, 150, 190, 0.32) 100%);
+  box-shadow: 
+    inset 0 2px 8px rgba(255, 255, 255, 0.9),
+    inset 0 -8px 24px rgba(37, 150, 190, 0.2),
+    0 14px 32px rgba(37, 150, 190, 0.16),
+    0 4px 12px rgba(0, 0, 0, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.85);
+  transition: box-shadow 0.4s ease, transform 0.4s ease;
+}
+
+/* Dark theme orb adaptation */
+[data-theme="dark"] .agent-orb-glass,
+html.dark .agent-orb-glass {
+  background: radial-gradient(circle at 35% 30%, rgba(37, 150, 190, 0.25) 0%, rgba(22, 27, 34, 0.85) 60%, rgba(14, 17, 22, 0.95) 100%);
+  box-shadow: 
+    inset 0 2px 6px rgba(255, 255, 255, 0.3),
+    inset 0 -10px 28px rgba(37, 150, 190, 0.35),
+    0 14px 36px rgba(0, 0, 0, 0.4),
+    0 0 40px rgba(37, 150, 190, 0.25);
+  border: 1px solid rgba(37, 150, 190, 0.25);
+}
+
+/* Specular Top Highlight */
+.agent-orb-glass::before {
+  content: "";
+  position: absolute;
+  top: 6%;
+  left: 15%;
+  right: 15%;
+  height: 25%;
+  border-radius: 50%;
+  background: radial-gradient(ellipse at 50% 30%, rgba(255, 255, 255, 0.7) 0%, rgba(255, 255, 255, 0) 70%);
+  pointer-events: none;
+  z-index: 5;
+}
+
+/* Acoustic Waves for Listening */
+.orb-sound-ring {
+  position: absolute;
+  border-radius: 50%;
+  border: 1.5px solid var(--accent);
+  opacity: 0;
+  pointer-events: none;
+  animation: orb-ring-expand 1.8s cubic-bezier(0.2, 0.8, 0.3, 1) infinite;
+}
+
+@keyframes orb-ring-expand {
+  0% {
+    transform: scale(0.92);
+    opacity: 0.65;
+  }
+  100% {
+    transform: scale(1.4);
+    opacity: 0;
+  }
+}
